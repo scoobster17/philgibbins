@@ -1,0 +1,123 @@
+{
+  "name": "phil-gibbins-portfolio-site",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Portfolio site for web developer Phil Gibbins",
+  "scripts": {
+    "build": "npm run build:server && npm run build:app",
+    "build:app": "NODE_ENV=production webpack --config webpack.prod.js",
+    "build:server": "tsc -p src/server/tsconfig.json",
+    "lint": "npm run lint:server && npm run lint:app",
+    "lint:app": "npm run lint:css && npm run lint:app:js",
+    "lint:css": "sass-lint -c .sass-lint.yml -q -v",
+    "lint:app:js": "tslint -p src/app",
+    "lint:server": "tslint -p src/server/tsconfig.json",
+    "start": "NODE_ENV=production TS_NODE_PROJECT=src/server/tsconfig.json node --require ts-node/register -r source-map-support/register src/server",
+    "start:dev": "npm run watch",
+    "test": "npm run test:server && npm run test:app",
+    "test:app": "TS_NODE_PROJECT=./src/app/tsconfig.json mocha --require ts-node/register --require jsdom-global/register src/app/**/*.spec.ts",
+    "test:app:dev": "TS_NODE_PROJECT=./src/app/tsconfig.json mocha --require ts-node/register --require jsdom-global/register src/app/**/*.spec.ts --watch --watch-extensions ts",
+    "test:server": "TS_NODE_PROJECT=src/server/tsconfig.json nyc mocha --require ts-node/register 'src/server/**/*.spec.ts'",
+    "test:server:dev": "TS_NODE_PROJECT=src/server/tsconfig.json mocha --require ts-node/register 'src/server/**/*.spec.ts' --watch --watch-extensions ts",
+    "watch": "concurrently 'npm run watch:app' 'npm run watch:server'",
+    "watch:app": "webpack --config webpack.dev.js --watch",
+    "watch:server": "nodemon -e ts,tsx -w ./src/server -x ts-node --project src/server/tsconfig.json -r source-map-support/register src/server"
+  },
+  "nyc": {
+    "exclude": [
+      "coverage",
+      "node_modules",
+      "dist",
+      "**/*.spec.ts",
+      "**/*.js"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "all": true,
+    "reporter": [
+      "html",
+      "text-summary"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scoobster17/philgibbins.git"
+  },
+  "keywords": [
+    "Phil",
+    "Gibbins",
+    "Portfolio"
+  ],
+  "author": "Phil Gibbins <scoobseter17@hotmail.co.uk> (https://philgibbins.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scoobster17/philgibbins/issues"
+  },
+  "homepage": "https://github.com/scoobster17/philgibbins#readme",
+  "dependencies": {
+    "@koa/cors": "^2.2.2",
+    "awesome-typescript-loader": "^5.2.1",
+    "config": "^3.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "^1.0.1",
+    "file-loader": "^2.0.0",
+    "js-yaml": "^3.12.0",
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-compose": "^4.1.0",
+    "koa-ejs": "^4.1.2",
+    "koa-mount": "^4.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "react": "16.6.0",
+    "react-dom": "16.6.0",
+    "react-router-dom": "4.3.1",
+    "sass-lint": "^1.12.1",
+    "sass-loader": "^7.1.0",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^0.23.1",
+    "tslint": "^5.11.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/config": "0.0.34",
+    "@types/koa": "^2.0.47",
+    "@types/koa-bodyparser": "^4.2.1",
+    "@types/koa-compose": "^3.2.2",
+    "@types/koa-mount": "^3.0.1",
+    "@types/koa-router": "^7.0.35",
+    "@types/koa-static": "^4.0.0",
+    "@types/koa__cors": "^2.2.3",
+    "@types/mocha": "^5.2.5",
+    "@types/react": "16.4.18",
+    "@types/react-dom": "16.0.9",
+    "@types/react-router-dom": "4.3.1",
+    "@types/sinon": "5.0.1",
+    "@types/sinon-chai": "^3.2.2",
+    "@types/winston": "^2.4.4",
+    "chai": "^4.2.0",
+    "concurrently": "^4.1.0",
+    "husky": "^1.2.1",
+    "jsdom": "^13.0.0",
+    "jsdom-global": "^3.0.2",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.8",
+    "nyc": "^13.1.0",
+    "sinon": "^7.2.2",
+    "sinon-chai": "^3.3.0",
+    "ts-node": "^7.0.1"
+  }
+}

@@ -1,0 +1,36 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: $primary-light-background-colour;
+  color: $primary-dark-body-font-colour;
+  font-family: arial, sans-serif;
+  line-height: 1.3;
+}
+
+h1 {
+  @include font-size(2.4);
+  margin: 0 0 32px;
+}
+
+h2 {
+  @include font-size(1.8);
+  margin: 0 0 10px;
+}
+
+h3 {
+  @include font-size(1.6);
+}
+
+p {
+  @include font-size(1.6);
+}
+
+li {
+  @include font-size(1.6);
+}
+
+form {
+  width: 100%;
+}
