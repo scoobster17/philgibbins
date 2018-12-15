@@ -9,7 +9,7 @@
 }
 
 @mixin button-reset() {
-  background-color: $primary-light-background-colour;
+  background-color: var(--primary-light-background-colour);
   border: none;
   padding: 0;
 }

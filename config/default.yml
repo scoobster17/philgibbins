@@ -8,6 +8,10 @@ renderingServer:
     host: http://localhost
     port: 9811
 
+ghost:
+  port: 6857
+  clientSecret:
+
 reporting:
   rollbar:
     enabled: false
