@@ -23,19 +23,19 @@ $super-light-grey: #f6f6f6;
   /////////////////////////////////////////////////////////////////////////////
 
   // fonts
-  --primary-dark-body-font-colour: #{ $dark-grey };
-  --secondary-dark-body-font-colour: #{ $mid-grey };
-  --primary-light-body-font-colour: #{ $white };
-  --secondary-light-body-font-colour: #{ $super-light-grey };
+  @include root-property(--primary-dark-body-font-colour, $dark-grey);
+  @include root-property(--secondary-dark-body-font-colour, $mid-grey);
+  @include root-property(--primary-light-body-font-colour, $white);
+  @include root-property(--secondary-light-body-font-colour, $super-light-grey);
 
   // backgrounds
-  --primary-light-background-colour: #{ $white };
-  --secondary-light-background-colour: #{ $super-light-grey };
-  --tertiary-light-background-colour: #{ $light-grey };
-  --modal-background-colour: rgba(62, 73, 88, 0.8);
+  @include root-property(--primary-light-background-colour, $white);
+  @include root-property(--secondary-light-background-colour, $super-light-grey);
+  @include root-property(--tertiary-light-background-colour, $light-grey);
+  @include root-property(--modal-background-colour, rgba(62, 73, 88, 0.8));
 
   // borders
-  --primary-border-colour: #{ $light-grey };
+  @include root-property(--primary-border-colour, $light-grey);
 
   /////////////////////////////////////////////////////////////////////////////
   // IMAGES
@@ -44,8 +44,6 @@ $super-light-grey: #f6f6f6;
   $image-path: '/assets/images/';
 
   // icons
-  --test-icon: '#{ $image-path }icons/test.svg';
+  @include root-property(--test-icon, '#{ $image-path }icons/test.svg');
 
 }
-
-

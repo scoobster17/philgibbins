@@ -1,5 +1,13 @@
 // sass-lint:disable no-duplicate-properties
 
+// temporary fix for sass-lint not supporting css variables on :root
+// https://github.com/sasstools/sass-lint/issues/1161
+@mixin root-property($property: null, $value: null) {
+  @if ($property and $value) {
+    #{ $property }: $value;
+  }
+}
+
 @mixin button-reset() {
   background-color: $primary-light-background-colour;
   border: none;
