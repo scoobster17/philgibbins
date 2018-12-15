@@ -10,7 +10,7 @@ export default Compose([
 
   // mount v1 endpoints
   Mount('/v1', Compose(
-    [ ...v1.map((router) => router.middleware()) ]
+    [ ...v1.map((router) => router.middleware()) ],
   )),
 
   // return the available versions of the api

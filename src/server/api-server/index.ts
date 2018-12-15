@@ -3,7 +3,7 @@ import { Context } from 'koa';
 import * as Koa from 'koa';
 import * as Mount from 'koa-mount';
 import * as Net from 'net';
-import Router from './router'
+import Router from './router';
 
 
 /**
@@ -16,7 +16,9 @@ export class ApiServer {
   constructor() {
     this.app = new Koa();
 
-    this.app.use(Mount('/api', (ctx: Context) => Router(ctx)));
+    this.app.use(
+      Mount('/api', async (ctx: Context) => Router(ctx)),
+    );
   }
 
   /**

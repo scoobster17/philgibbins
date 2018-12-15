@@ -19,7 +19,9 @@ export const get = new Router()
     const secret = config.get<string>('ghost.clientSecret');
 
     try {
-      const { body: articles } = await got(`http://localhost:${port}/ghost/api/v0.1/posts/?client_id=ghost-frontend&client_secret=${secret}`);
+      const { body: articles } = await got(
+        `http://localhost:${port}/ghost/api/v0.1/posts/?client_id=ghost-frontend&client_secret=${secret}`,
+      );
 
       ctx.body = articles;
       ctx.status = 200;
