@@ -1,11 +1,5 @@
 // sass-lint:disable no-duplicate-properties
 
-@mixin font-size($size) {
-  font-size: #{$size * 10}px;
-  font-size: #{$size}em;
-  font-size: #{$size}rem;
-}
-
 @mixin button-reset() {
   background-color: $primary-light-background-colour;
   border: none;

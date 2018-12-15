@@ -2,6 +2,12 @@
 @import 'config/_vars';
 @import 'config/_mixins';
 
+// css reset (~ tells webpack to look in node_modules)
+@import '~reset-css/sass/reset';
+
 // global styles
 @import 'global/_fonts';
 @import 'global/_common';
+
+// components
+@import 'components/_header';
