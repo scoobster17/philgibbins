@@ -9,11 +9,6 @@ import { Context } from 'koa';
 export function ejs(template: 'index', isProduction: boolean) {
   return async (ctx: Context, next: Function) => {
 
-    // favicon redirect
-    if (ctx.path === '/favicon.ico') {
-      return ctx.redirect('/assets/images/icons/favicon.ico');
-    }
-
     // we are using react hash router so the only pages that should ever
     // be served are index (/) and oauth which is handled already
     if (ctx.path !== '/') {

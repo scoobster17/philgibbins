@@ -1,11 +1,11 @@
 apiServer:
   http:
-    host: http://localhost
+    baseUrl: http://localhost
     port: 9810
 
 renderingServer:
   http:
-    host: http://localhost
+    baseUrl: http://localhost
     port: 9811
 
 ghost:
