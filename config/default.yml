@@ -17,3 +17,11 @@ reporting:
     enabled: false
     environmentName: 'default'
     accessToken: 'access-token'
+
+servers:
+  http2:
+    port: 9810
+    auth:
+      certificate: 'config/certificate.pem'
+      key: 'config/key.pem'
+      passphrase:

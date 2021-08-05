@@ -1,8 +1,10 @@
 import * as config from 'config';
-import { ApiServer } from './api-server';
 import { RenderingServer } from './rendering-server';
 import * as Winston from 'winston';
 import Signals = NodeJS.Signals;
+import { Server } from '@philgibbins/server/dist';
+import * as fs from 'fs';
+import * as path from 'path';
 
 
 Winston.configure({
@@ -23,14 +25,42 @@ async function waitForQuitSignal(): Promise<Signals> {
 
 /**
  *
+ * @param fileName
+ */
+const readFile = async (fileName: string) => {
+  return new Promise<string>((resolve, reject) => {
+    fs.readFile(path.resolve(process.cwd(), fileName), (err: NodeJS.ErrnoException | null, data: Buffer): void => {
+      if (err) {
+        return reject(err);
+      }
+
+      return resolve(data.toString());
+    });
+  });
+};
+
+/**
+ *
  */
 const start = async () => {
   const isProduction = (process.env.NODE_ENV === 'production');
+  const certificateFilePath = config.get<string>('servers.http2.auth.certificate');
+  const keyFilePath = config.get<string>('servers.http2.auth.key');
+  // TODO: passphrase
 
   Winston.info('initializing API Server');
-  const staticApiServer = new ApiServer();
+  // const staticApiServer = new ApiServer();
+  const staticApiServer = new Server({
+    http2: {
+      port: config.get<number>('servers.http2.port'),
+      auth: {
+        certificate: await readFile(certificateFilePath),
+        key: await readFile(keyFilePath),
+      },
+    },
+  });
   const apiServerPort = config.get<number>('apiServer.http.port');
-  const apiServer = await staticApiServer.serve(apiServerPort);
+  await staticApiServer.start();
   Winston.info(`API Server listening on port: ${ apiServerPort }`);
 
   Winston.info('initializing Rendering Server');
@@ -42,7 +72,7 @@ const start = async () => {
   const signal = await waitForQuitSignal();
   Winston.info(`got ${ signal }`);
 
-  await apiServer.close();
+  await staticApiServer.stop();
   Winston.info('APIServer terminated');
 
   await renderingServer.close();

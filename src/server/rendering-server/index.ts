@@ -42,9 +42,9 @@ export class RenderingServer {
    * @param port
    */
   async serve(port: number): Promise<Net.Server> {
-    return await new Promise<Net.Server>((resolve, reject) => {
+    return await new Promise<Net.Server>((resolve) => {
       const server = Http.createServer(this.app.callback())
-        .listen(port, (err: any) => err ? reject(err) : resolve(server));
+        .listen(port, () => resolve(server));
     });
   }
 }
