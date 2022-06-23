@@ -115,7 +115,7 @@
     "chai": "^4.2.0",
     "concurrently": "^4.1.0",
     "husky": "^1.2.1",
-    "jsdom": "^13.0.0",
+    "jsdom": "^16.5.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.8",
